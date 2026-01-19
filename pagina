@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Digital: Adolescentes 13-14 años</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Soft Cream, Slate Blue, Deep Charcoal, and Sage Accents) -->
+    <!-- Application Structure Plan: La aplicación mantiene su flujo temático pero expande significativamente la profundidad del contenido textual de los riesgos para padres de adolescentes de 13-14 años. Se han reparado los embeds de video utilizando contenedores responsivos. Se mantiene la sección de IA con Gemini para asistencia en tiempo real. -->
+    <!-- Visualization & Content Choices: Report Info: Riesgos Críticos -> Goal: Educación profunda -> Viz/Presentation Method: Layout de columna dividida (Texto descriptivo + Video) -> Interaction: Pestañas para cada riesgo. | Report Info: Videos de YouTube -> Goal: Demostración visual -> Viz/Presentation Method: Iframe responsivo 16:9 -> Interaction: Reproducción directa. | CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF8F0;
+            color: #333333;
+        }
+        .active-tab {
+            border-color: #4E8098;
+            background-color: #4E8098;
+            color: #FFFFFF;
+        }
+        .inactive-tab {
+            border-color: #E0E0E0;
+            background-color: #FFFFFF;
+            color: #4A4A4A;
+        }
+        .nav-link.active {
+            font-weight: 700;
+            color: #4E8098;
+            border-bottom: 2px solid #4E8098;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background-color: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .ai-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f3f7f9 100%);
+            border: 1px solid #e2e8f0;
+        }
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 bg-[#4E8098] rounded-lg flex items-center justify-center text-white font-bold">A</div>
+                    <h1 class="text-lg font-bold text-gray-800 hidden sm:block">Guía Digital Adolescentes</h1>
+                </div>
+                <div class="flex items-baseline space-x-1 md:space-x-4 overflow-x-auto">
+                    <a href="#mundo" class="nav-link text-gray-600 hover:text-[#4E8098] px-2 md:px-3 py-2 text-xs md:text-sm font-medium transition-all">Contexto</a>
+                    <a href="#riesgos" class="nav-link text-gray-600 hover:text-[#4E8098] px-2 md:px-3 py-2 text-xs md:text-sm font-medium transition-all">Riesgos</a>
+                    <a href="#controles" class="nav-link text-gray-600 hover:text-[#4E8098] px-2 md:px-3 py-2 text-xs md:text-sm font-medium transition-all">Herramientas</a>
+                    <a href="#plan" class="nav-link text-gray-600 hover:text-[#4E8098] px-2 md:px-3 py-2 text-xs md:text-sm font-medium transition-all">Negociación</a>
+                    <a href="#asistente-ia" class="nav-link text-gray-600 hover:text-[#4E8098] px-2 md:px-3 py-2 text-xs md:text-sm font-medium transition-all">IA ✨</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Hero Section -->
+        <section class="text-center py-12 md:py-20">
+            <span class="inline-block px-4 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold uppercase tracking-wider mb-4">Etapa: 13 - 14 Años</span>
+            <h2 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">De la Protección a la <span class="text-[#4E8098]">Autonomía Digital</span></h2>
+            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">Estrategias avanzadas para padres. Navegando el impacto social, la identidad y la salud emocional en la pubertad.</p>
+        </section>
+
+        <!-- Mundo Digital 13-14 -->
+        <section id="mundo" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-[#4E8098]">1. El Desafío de los 13 y 14 Años</h3>
+                <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">A esta edad, internet es el ecosistema donde ocurre la "separación" de los padres y la unión definitiva con el grupo de pares.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 text-2xl">👤</div>
+                    <h4 class="text-xl font-bold mb-3 text-indigo-900">Validación Externa</h4>
+                    <p class="text-gray-600 text-sm">El adolescente de 13 años vive para el "like". El cerebro en esta etapa es hipersensible a la recompensa social y al rechazo. Un comentario negativo puede sentirse como el fin del mundo.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4 text-2xl">📱</div>
+                    <h4 class="text-xl font-bold mb-3 text-pink-900">La "Vida Líquida"</h4>
+                    <p class="text-gray-600 text-sm">Sus amistades fluyen a través de múltiples plataformas. Snapchat para momentos efímeros, TikTok para tendencias y Discord para jugar. No hay una frontera clara entre lo físico y lo digital.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-4 text-2xl">🛡️</div>
+                    <h4 class="text-xl font-bold mb-3 text-yellow-900">Criterio en Formación</h4>
+                    <p class="text-gray-600 text-sm">Aunque parecen expertos tecnológicos, carecen de la madurez prefrontal para evaluar consecuencias a largo plazo. Su identidad digital se está construyendo bajo una presión constante.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Riesgos Específicos -->
+        <section id="riesgos" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-[#4E8098]">2. Riesgos Críticos y Señales de Alerta</h3>
+                <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">Los peligros a esta edad son relacionales y psicológicos. Es vital entender no solo qué pasa, sino cómo lo viven ellos.</p>
+            </div>
+
+            <div class="mb-8 flex flex-wrap justify-center gap-2">
+                <button data-tab="riesgos-tab" data-target="ciberacoso" class="px-5 py-2.5 text-sm font-semibold border rounded-full transition-all active-tab">Ciberacoso</button>
+                <button data-tab="riesgos-tab" data-target="grooming" class="px-5 py-2.5 text-sm font-semibold border rounded-full transition-all inactive-tab">Grooming</button>
+                <button data-tab="riesgos-tab" data-target="sexting" class="px-5 py-2.5 text-sm font-semibold border rounded-full transition-all inactive-tab">Sexting / Privacidad</button>
+                <button data-tab="riesgos-tab" data-target="adiccion" class="px-5 py-2.5 text-sm font-semibold border rounded-full transition-all inactive-tab">Salud Mental</button>
+            </div>
+
+            <div class="bg-white p-6 md:p-12 rounded-3xl shadow-xl border border-gray-50">
+                <!-- Ciberacoso -->
+                <div id="ciberacoso" class="riesgos-content space-y-6">
+                    <div class="flex flex-col lg:flex-row gap-10 items-center">
+                        <div class="w-full lg:w-3/5 space-y-4">
+                            <h4 class="text-3xl font-bold text-gray-900">Ciberacoso: El Aislamiento Social 24/7</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                A diferencia del bullying tradicional, el ciberacoso a los 13-14 años suele ser **pasivo-agresivo**. Se manifiesta mediante la exclusión de grupos de WhatsApp, la difusión de capturas de pantalla de chats privados para humillar, o el uso de cuentas "falsas" para insultar de forma anónima.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Para un adolescente, ser expulsado del círculo digital equivale a una **"muerte social"**. El acoso no termina al llegar a casa; lo llevan en el bolsillo todo el día. Esto genera un estado de alerta constante que afecta gravemente su desarrollo emocional.
+                            </p>
+                            <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg">
+                                <h5 class="font-bold text-red-900 mb-1">Señales de alarma crítica:</h5>
+                                <ul class="list-disc list-inside text-sm text-red-800 space-y-1">
+                                    <li>Muestran ansiedad o irritabilidad extrema al recibir notificaciones.</li>
+                                    <li>Evitan ir al colegio o fingen enfermedades físicas.</li>
+                                    <li>Abandonan repentinamente una red social que antes amaban.</li>
+                                    <li>Aislarse de la familia para evitar que vean su pantalla.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/j-tFoYNHi1w" title="Video Ciberacoso" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grooming -->
+                <div id="grooming" class="riesgos-content hidden space-y-6">
+                    <div class="flex flex-col lg:flex-row gap-10 items-center">
+                        <div class="w-full lg:w-3/5 space-y-4">
+                            <h4 class="text-3xl font-bold text-gray-900">Grooming: El Engaño Emocional</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                El grooming a esta edad no siempre empieza con peticiones sexuales. El agresor suele presentarse como un **"adulto comprensivo"** o un **"adolescente exitoso"** que comparte sus mismos gustos (videojuegos, anime, música). 
+                            </p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Utilizan el **"Love Bombing"**: halagan constantemente al joven para llenar vacíos de autoestima. Una vez que ganan su confianza total, comienzan a pedir "pruebas de amistad" (fotos o secretos) que luego usan para chantajearlos (sextorsión).
+                            </p>
+                            <div class="bg-orange-50 border-l-4 border-orange-400 p-5 rounded-r-lg">
+                                <h5 class="font-bold text-orange-900 mb-1">Cómo actúan los agresores:</h5>
+                                <p class="text-sm text-orange-800 italic">"Tus padres no te entienden como yo", "Esto es nuestro secreto", "Si me aprecias de verdad, envíame esto".</p>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/OdixH25nCHk" title="Video Grooming" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sexting -->
+                <div id="sexting" class="riesgos-content hidden space-y-6">
+                    <div class="flex flex-col lg:flex-row gap-10 items-center">
+                        <div class="w-full lg:w-3/5 space-y-4">
+                            <h4 class="text-3xl font-bold text-gray-900">Sexting e Identidad Corporal</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                A los 13 y 14 años, la exploración de la sexualidad se traslada a la pantalla. El sexting suele ocurrir por **presión de grupo** o como prueba de "amor" en las primeras relaciones. 
+                            </p>
+                            <p class="text-gray-700 leading-relaxed">
+                                El gran riesgo es la **pérdida de control**. Un contenido enviado bajo confianza puede viralizarse en segundos por una ruptura sentimental o una pelea entre amigos. A esta edad, no entienden que lo que suben a la nube es **permanente** y puede afectar sus futuras oportunidades académicas y laborales.
+                            </p>
+                            <div class="p-6 bg-blue-50 rounded-2xl border border-blue-100">
+                                <h5 class="font-bold text-blue-900 mb-2">Consejo para la charla:</h5>
+                                <p class="text-sm text-blue-800">No hablemos de moral, hablemos de **"Cadena de Custodia"**. Una vez que la foto sale de su móvil, ya no es suya. Es de cualquiera que tenga un botón de 'reenviar'.</p>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5">
+                            <div class="bg-gray-100 h-64 rounded-3xl flex flex-col items-center justify-center p-8 text-center border-2 border-dashed border-gray-300">
+                                <span class="text-5xl mb-4">📵</span>
+                                <p class="text-gray-500 font-medium">La privacidad es un derecho que deben aprender a proteger de sí mismos y de los demás.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salud Mental -->
+                <div id="adiccion" class="riesgos-content hidden space-y-6">
+                    <div class="flex flex-col lg:flex-row gap-10 items-center">
+                        <div class="w-full lg:w-3/5 space-y-4">
+                            <h4 class="text-3xl font-bold text-gray-900">Salud Mental: La Tiranía del Algoritmo</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                Las redes sociales están diseñadas para explotar la **dopamina**. Los adolescentes son especialmente vulnerables a la comparación constante con vidas "perfectas" y cuerpos editados en Instagram o TikTok.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed">
+                                El **FOMO** (miedo a quedarse fuera) los mantiene despiertos hasta altas horas de la madrugada, afectando el ciclo del sueño y, por ende, su capacidad de aprendizaje e irritabilidad. La falta de sueño es el primer paso hacia trastornos de ansiedad y depresión en esta etapa.
+                            </p>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-lg">
+                                <h5 class="font-bold text-yellow-900 mb-1">Impacto psicológico:</h5>
+                                <p class="text-sm text-yellow-800 italic">"Si no tengo likes, no soy importante". La autoestima se vuelve dependiente de métricas externas y artificiales.</p>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/TwCT5TaVB2s" title="Video Adicción" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Herramientas -->
+        <section id="controles" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-[#4E8098]">3. Estrategias y Controles Parentales</h3>
+                <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">Configuraciones técnicas para acompañar su crecimiento digital sin invadir su privacidad innecesariamente.</p>
+            </div>
+
+            <div class="mb-4 flex flex-wrap justify-center gap-2">
+                <button data-tab="tools-tab" data-target="os-ios" class="px-4 py-2 text-sm font-bold border rounded-lg transition-all active-tab">iOS</button>
+                <button data-tab="tools-tab" data-target="os-android" class="px-4 py-2 text-sm font-bold border rounded-lg transition-all inactive-tab">Android</button>
+                <button data-tab="tools-tab" data-target="os-apps" class="px-4 py-2 text-sm font-bold border rounded-lg transition-all inactive-tab">Apps de Terceros</button>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
+                <div id="os-ios" class="tools-content">
+                    <h4 class="text-xl font-bold mb-4">iOS (iPhone) - Tiempo de Uso</h4>
+                    <p class="text-gray-600 mb-6">Permite limitar aplicaciones específicas, bloquear contenido adulto en Safari y gestionar la privacidad de la ubicación.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://support.apple.com/es-es/105121" target="_blank" class="bg-[#4E8098] text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-opacity-90">Guía Oficial</a>
+                        <a href="https://youtu.be/uwA8tZC6Jlo" target="_blank" class="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-200">▶️ Videotutorial</a>
+                    </div>
+                </div>
+
+                <div id="os-android" class="tools-content hidden">
+                    <h4 class="text-xl font-bold mb-4">Android - Google Family Link</h4>
+                    <p class="text-gray-600 mb-6">Excelente para adolescentes. Permite "aprobar" apps antes de que se instalen y bloquear el dispositivo a la hora de dormir.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://families.google/familylink/" target="_blank" class="bg-[#4E8098] text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-opacity-90">Guía Oficial</a>
+                        <a href="https://youtu.be/1q4L7hZ9LM0" target="_blank" class="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-200">▶️ Videotutorial</a>
+                    </div>
+                </div>
+
+                <div id="os-apps" class="tools-content hidden">
+                    <h4 class="text-xl font-bold mb-6">Software de Supervisión Avanzada</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-5 border border-gray-100 rounded-2xl bg-gray-50">
+                            <h5 class="font-bold text-gray-800">Qustodio</h5>
+                            <p class="text-xs text-gray-500 mb-3">Filtrado web inteligente y límites de tiempo multiplataforma.</p>
+                            <a href="https://youtu.be/BumWM0uWe5c" target="_blank" class="text-xs font-bold text-[#4E8098] hover:underline">Ver Tutorial</a>
+                        </div>
+                        <div class="p-5 border border-gray-100 rounded-2xl bg-gray-50">
+                            <h5 class="font-bold text-gray-800">Bark</h5>
+                            <p class="text-xs text-gray-500 mb-3">Analiza mensajes en busca de signos de ciberacoso o depresión.</p>
+                            <a href="https://youtu.be/rIUVC62xwB4" target="_blank" class="text-xs font-bold text-[#4E8098] hover:underline">Ver Tutorial</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan de Negociación -->
+        <section id="plan" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-[#4E8098]">4. De las Reglas a la Negociación</h3>
+                <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">Un adolescente de 13-14 años responderá mejor a un acuerdo negociado que a una prohibición tajante.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-[#4E8098] text-white p-10 rounded-3xl shadow-lg">
+                    <h4 class="text-2xl font-bold mb-6">El Acuerdo de Confianza</h4>
+                    <ul class="space-y-4">
+                        <li class="flex gap-4">
+                            <span class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold shrink-0">1</span>
+                            <p class="text-sm"><strong>Privacidad con Respaldo:</strong> No revisaremos tus chats privados por rutina, pero tendremos acceso si detectamos una situación de peligro real.</p>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold shrink-0">2</span>
+                            <p class="text-sm"><strong>Higiene del Sueño:</strong> El móvil descansa fuera de la habitación a partir de las 10 PM. El descanso cerebral no es negociable.</p>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold shrink-0">3</span>
+                            <p class="text-sm"><strong>Segunda Opinión:</strong> Ante cualquier foto o mensaje sospechoso, nos comprometemos a no reaccionar con gritos para que sientas la libertad de contárnoslo.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-lg border border-gray-100 flex flex-col justify-center">
+                    <h4 class="text-2xl font-bold mb-4 text-gray-800">Actividades "Off-Screen"</h4>
+                    <p class="text-gray-600 mb-6 italic">"El mejor filtro parental es el tiempo compartido en el mundo real".</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 px-4 py-2 rounded-full text-xs font-semibold text-gray-700">🧗‍♂️ Deporte / Escala</span>
+                        <span class="bg-gray-100 px-4 py-2 rounded-full text-xs font-semibold text-gray-700">🎨 Arte Digital/Físico</span>
+                        <span class="bg-gray-100 px-4 py-2 rounded-full text-xs font-semibold text-gray-700">🍰 Cocina en Familia</span>
+                        <span class="bg-gray-100 px-4 py-2 rounded-full text-xs font-semibold text-gray-700">🛹 Salidas con Amigos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASISTENTE INTELIGENTE ✨ -->
+        <section id="asistente-ia" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-[#4E8098]">5. Asistente Inteligente para Padres ✨</h3>
+                <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">Potenciado por Gemini. Resuelve dudas sobre jerga adolescente o prepara conversaciones difíciles.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="ai-card p-8 rounded-3xl shadow-sm">
+                    <h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <span>💬</span> Descifrar Jerga ✨
+                    </h4>
+                    <textarea id="slang-input" class="w-full p-4 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-[#4E8098] outline-none" rows="3" placeholder="Ingresa esa palabra que no entendiste (ej: 'Simp', 'F', 'Cringe')..."></textarea>
+                    <button id="btn-translate" class="mt-4 w-full bg-[#4E8098] text-white py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-md">Consultar a la IA ✨</button>
+                    <div id="slang-result" class="mt-4 p-5 bg-white rounded-xl text-sm hidden border border-gray-100 text-gray-700 leading-relaxed shadow-inner"></div>
+                </div>
+
+                <div class="ai-card p-8 rounded-3xl shadow-sm">
+                    <h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <span>📝</span> Preparar Conversación ✨
+                    </h4>
+                    <input id="conflict-input" type="text" class="w-full p-4 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-[#4E8098] outline-none" placeholder="Ej: Me ocultó su contraseña de Instagram...">
+                    <button id="btn-script" class="mt-4 w-full bg-gray-800 text-white py-3 rounded-xl font-bold hover:bg-gray-700 transition-all shadow-md">Generar Guion ✨</button>
+                    <div id="script-result" class="mt-4 p-5 bg-white rounded-xl text-xs hidden border border-gray-100 whitespace-pre-wrap text-gray-700 shadow-inner"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white py-16 mt-20">
+        <div class="container mx-auto px-4 text-center">
+            <h5 class="text-2xl font-bold mb-4">Resiliencia Digital</h5>
+            <p class="text-gray-400 max-w-lg mx-auto text-sm leading-relaxed">No podemos evitar que naveguen por mares turbulentos, pero sí podemos enseñarles a ser excelentes capitanes de su propio barco digital.</p>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-xs text-gray-500">
+                &copy; 2026 Taller para Padres - Adolescentes 13-14 Años.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // CONFIGURACIÓN DE LA API DE GEMINI
+        const apiKey = ""; 
+
+        async function callGemini(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: "Eres un psicólogo experto en adolescencia y seguridad digital. Responde de forma clara, empática y práctica para padres. No uses formato Markdown complejo, usa párrafos simples. Sé directo y útil." }] }
+            };
+
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error('API Error');
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo generar una respuesta.";
+                } catch (error) {
+                    if (i === 4) return "Error de conexión con la IA.";
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejador de pestañas
+            const handleTabs = (tabAttr, contentClass) => {
+                const buttons = document.querySelectorAll(`[data-tab="${tabAttr}"]`);
+                const contents = document.querySelectorAll(`.${contentClass}`);
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        buttons.forEach(b => { b.classList.remove('active-tab'); b.classList.add('inactive-tab'); });
+                        btn.classList.add('active-tab');
+                        btn.classList.remove('inactive-tab');
+                        const target = btn.dataset.target;
+                        contents.forEach(c => c.id === target ? c.classList.remove('hidden') : c.classList.add('hidden'));
+                    });
+                });
+            };
+            handleTabs('riesgos-tab', 'riesgos-content');
+            handleTabs('tools-tab', 'tools-content');
+
+            // Lógica IA
+            const btnTranslate = document.getElementById('btn-translate');
+            const slangInput = document.getElementById('slang-input');
+            const slangResult = document.getElementById('slang-result');
+
+            btnTranslate.addEventListener('click', async () => {
+                if (!slangInput.value.trim()) return;
+                slangResult.classList.remove('hidden');
+                slangResult.innerHTML = '<span class="loading-dots italic">Analizando término</span>';
+                const prompt = `Explica brevemente para un padre qué significa: "${slangInput.value}". Di si es peligroso o inofensivo.`;
+                const res = await callGemini(prompt);
+                slangResult.innerHTML = `<strong>Análisis IA:</strong> ${res}`;
+            });
+
+            const btnScript = document.getElementById('btn-script');
+            const conflictInput = document.getElementById('conflict-input');
+            const scriptResult = document.getElementById('script-result');
+
+            btnScript.addEventListener('click', async () => {
+                if (!conflictInput.value.trim()) return;
+                scriptResult.classList.remove('hidden');
+                scriptResult.innerHTML = '<span class="loading-dots italic">Generando guion</span>';
+                const prompt = `Genera un guion corto para hablar con un hijo de 14 años sobre: "${conflictInput.value}". Usa asertividad y empatía.`;
+                const res = await callGemini(prompt);
+                scriptResult.innerText = res;
+            });
+
+            // Scroll Spy
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            window.addEventListener('scroll', () => {
+                let current = "";
+                sections.forEach(section => {
+                    if (pageYOffset >= (section.offsetTop - 200)) current = section.getAttribute('id');
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) link.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
