@@ -370,33 +370,40 @@
 
     <script>
         // CONFIGURACIÓN DE LA API DE GEMINI
-        const apiKey = "AIzaSyChuyQSCcsLpsmJwpubEl4JZ1UQugK22rI"; 
+               
+async function callGemini(prompt) {
+    // 1. Usa tu NUEVA clave aquí
+    const apiKey = "TU_NUEVA_LLAVE_AQUI"; 
+    
+    // 2. Asegúrate de que la URL sea exactamente esta (sin espacios al final)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
-        async function callGemini(prompt) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: "Eres un psicólogo experto en adolescencia y seguridad digital. Responde de forma clara, empática y práctica para padres. No uses formato Markdown complejo, usa párrafos simples. Sé directo y útil." }] }
-            };
+    const payload = {
+        contents: [{
+            parts: [{ text: prompt }]
+        }]
+    };
 
-            let delay = 1000;
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (!response.ok) throw new Error('API Error');
-                    const data = await response.json();
-                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo generar una respuesta.";
-                } catch (error) {
-                    if (i === 4) return "Error de conexión con la IA.";
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    delay *= 2;
-                }
-            }
+    try {
+        const response = await fetch(url, {
+            method: 'POST', // ESTO ES VITAL: Debe ser POST
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.status === 404) {
+            return "Error: La URL de la API es incorrecta o el modelo no está disponible.";
         }
+
+        const data = await response.json();
+        return data.candidates[0].content.parts[0].text;
+    } catch (error) {
+        console.error("Error completo:", error);
+        return "Error de conexión.";
+    }
+}
 
         document.addEventListener('DOMContentLoaded', function() {
             // Manejador de pestañas
