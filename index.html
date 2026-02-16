@@ -368,99 +368,159 @@
         </div>
     </footer>
 
-    <script>
-        // CONFIGURACIÓN DE LA API DE GEMINI
-               
-async function callGemini(prompt) {
-    // 1. Usa tu NUEVA clave aquí
-    const apiKey = "AIzaSyDMFvCz1YpXJEzNUKuRZDcqerFfHOYwZhQ"; 
-    
-    // 2. Asegúrate de que la URL sea exactamente esta (sin espacios al final)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
-    const payload = {
-        contents: [{
-            parts: [{ text: prompt }]
-        }]
-    };
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST', // ESTO ES VITAL: Debe ser POST
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.status === 404) {
-            return "Error: La URL de la API es incorrecta o el modelo no está disponible.";
+<script>
+        // --- GESTIÓN DE LA API KEY (Para evitar bloqueos de GitHub) ---
+        function getApiKey() {
+            // 1. Intentamos recuperar la clave guardada en el navegador
+            let key = localStorage.getItem("gemini_api_key");
+            
+            // 2. Si no existe, la pedimos al usuario (SOLO UNA VEZ)
+            if (!key || key === "null" || key.trim() === "") {
+                key = prompt("🔧 Configuración del Facilitador:\nPor favor, pega tu API Key de Gemini nueva aquí para activar la IA:");
+                if (key) {
+                    localStorage.setItem("gemini_api_key", key.trim());
+                }
+            }
+            return key;
         }
 
-        const data = await response.json();
-        return data.candidates[0].content.parts[0].text;
-    } catch (error) {
-        console.error("Error completo:", error);
-        return "Error de conexión.";
-    }
-}
+        // --- FUNCIÓN DE LLAMADA A GEMINI ---
+        async function callGemini(prompt) {
+            const apiKey = getApiKey();
 
+            if (!apiKey) {
+                return "⚠️ Error: No se ha configurado la API Key. Recarga la página e ingrésala.";
+            }
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    // Si la clave falla, la borramos para pedirla de nuevo la próxima vez
+                    if (response.status === 400 || response.status === 403) {
+                        localStorage.removeItem("gemini_api_key");
+                        return "⛔ Error de autenticación. Tu API Key parece inválida. Recarga la página para ingresarla de nuevo.";
+                    }
+                    return `Error del servidor: ${response.status}`;
+                }
+
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "La IA no devolvió respuesta.";
+
+            } catch (error) {
+                console.error("Error completo:", error);
+                return "Error de conexión. Verifica tu internet.";
+            }
+        }
+
+        // --- LÓGICA DE LA INTERFAZ ---
         document.addEventListener('DOMContentLoaded', function() {
-            // Manejador de pestañas
+            
+            // 1. Manejo de Pestañas (Tabs)
             const handleTabs = (tabAttr, contentClass) => {
                 const buttons = document.querySelectorAll(`[data-tab="${tabAttr}"]`);
                 const contents = document.querySelectorAll(`.${contentClass}`);
                 buttons.forEach(btn => {
                     btn.addEventListener('click', () => {
-                        buttons.forEach(b => { b.classList.remove('active-tab'); b.classList.add('inactive-tab'); });
+                        // Resetear estilos
+                        buttons.forEach(b => { 
+                            b.classList.remove('active-tab'); 
+                            b.classList.add('inactive-tab'); 
+                        });
+                        // Activar botón actual
                         btn.classList.add('active-tab');
                         btn.classList.remove('inactive-tab');
+                        
+                        // Mostrar contenido correspondiente
                         const target = btn.dataset.target;
-                        contents.forEach(c => c.id === target ? c.classList.remove('hidden') : c.classList.add('hidden'));
+                        contents.forEach(c => {
+                            if (c.id === target) {
+                                c.classList.remove('hidden');
+                            } else {
+                                c.classList.add('hidden');
+                            }
+                        });
                     });
                 });
             };
+            
+            // Inicializar pestañas
             handleTabs('riesgos-tab', 'riesgos-content');
             handleTabs('tools-tab', 'tools-content');
 
-            // Lógica IA
+            // 2. Lógica del Botón "Descifrar Jerga"
             const btnTranslate = document.getElementById('btn-translate');
             const slangInput = document.getElementById('slang-input');
             const slangResult = document.getElementById('slang-result');
 
-            btnTranslate.addEventListener('click', async () => {
-                if (!slangInput.value.trim()) return;
-                slangResult.classList.remove('hidden');
-                slangResult.innerHTML = '<span class="loading-dots italic">Analizando término</span>';
-                const prompt = `Explica brevemente para un padre qué significa: "${slangInput.value}". Di si es peligroso o inofensivo.`;
-                const res = await callGemini(prompt);
-                slangResult.innerHTML = `<strong>Análisis IA:</strong> ${res}`;
-            });
+            if(btnTranslate) {
+                btnTranslate.addEventListener('click', async () => {
+                    if (!slangInput.value.trim()) return;
+                    
+                    // UI de carga
+                    slangResult.classList.remove('hidden');
+                    slangResult.innerHTML = '<span class="loading-dots italic">Analizando término...</span>';
+                    
+                    // Llamada a la IA
+                    const prompt = `Actúa como un experto en cultura digital adolescente. Explica brevemente y de forma sencilla para un padre qué significa el término: "${slangInput.value}". Al final, indica si es peligroso o inofensivo.`;
+                    const res = await callGemini(prompt);
+                    
+                    // Mostrar resultado
+                    slangResult.innerHTML = `<strong>Análisis IA:</strong><br>${res}`;
+                });
+            }
 
+            // 3. Lógica del Botón "Generar Guion"
             const btnScript = document.getElementById('btn-script');
             const conflictInput = document.getElementById('conflict-input');
             const scriptResult = document.getElementById('script-result');
 
-            btnScript.addEventListener('click', async () => {
-                if (!conflictInput.value.trim()) return;
-                scriptResult.classList.remove('hidden');
-                scriptResult.innerHTML = '<span class="loading-dots italic">Generando guion</span>';
-                const prompt = `Genera un guion corto para hablar con un hijo de 14 años sobre: "${conflictInput.value}". Usa asertividad y empatía.`;
-                const res = await callGemini(prompt);
-                scriptResult.innerText = res;
-            });
+            if(btnScript) {
+                btnScript.addEventListener('click', async () => {
+                    if (!conflictInput.value.trim()) return;
+                    
+                    // UI de carga
+                    scriptResult.classList.remove('hidden');
+                    scriptResult.innerHTML = '<span class="loading-dots italic">Generando guion...</span>';
+                    
+                    // Llamada a la IA
+                    const prompt = `Genera un guion muy corto (máximo 3 frases) y asertivo para que un padre hable con su hijo de 14 años sobre esta situación: "${conflictInput.value}". Usa un tono empático pero firme.`;
+                    const res = await callGemini(prompt);
+                    
+                    // Mostrar resultado
+                    scriptResult.innerText = res;
+                });
+            }
 
-            // Scroll Spy
+            // 4. Scroll Spy (Menú activo al bajar)
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
+            
             window.addEventListener('scroll', () => {
                 let current = "";
                 sections.forEach(section => {
-                    if (pageYOffset >= (section.offsetTop - 200)) current = section.getAttribute('id');
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= (sectionTop - 250)) {
+                        current = section.getAttribute('id');
+                    }
                 });
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) link.classList.add('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
                 });
             });
         });
